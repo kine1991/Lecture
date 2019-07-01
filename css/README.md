@@ -26,9 +26,20 @@
     }
 }
 ```
+## Filter
+```bash
+filter: brightness(70%);
+```
+## Image
+```bash
+    background-image: linear-gradient(rgba($color-secondary, .93), rgba($color-secondary, .68)), url(../img/hero.jpeg);
+    background-size: cover;
+    background-position: center;
+```
+
+
+
 ## ul li a
-
-
 ```bash
 <ul class="nav">
 <li class="nav__item"><a href="#" class="nav__link">Find your dream home</a></li>
