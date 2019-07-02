@@ -91,5 +91,33 @@ filter: brightness(70%);
 ```bash
     background-image : linear-gradient(rgba($color-primary, .5), rgba($color-primary, .5)), url(../img/back.jpg);
 ```
+## :before - надожение изображения
+
+```bash
+    /* Showcase */
+#showcase {
+    color: #fff;
+    background: #333;
+    padding: 2rem;
+    position: relative;
+  }
+  
+  #showcase:before {
+    content: '';
+    background: url('../img/featured.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+  }
+```
+
+
+## grid 
+    grid-template-columns: minmax(min-content, max-content); - ели хватает места то вся строка помещаеться, если нет то переносится
+
+
 
 [Полный список опций](https://google.com)

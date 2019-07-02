@@ -17,7 +17,7 @@
 
 ![Alt text](./image/code-lexical-enviroment.png?raw=true "Title")
 
-функция a() - лексически в findMyName окружении
+функция a() - лексически в findName окружении
 
 <strong>lexical scope</strong> - где функция была определена. Все в js lexical scope, кроме <strong>this</strong>
 
@@ -27,11 +27,112 @@
 
 ![Alt text](./image/lexical-dinamic-scope-determination.png "Title")
 
-
 ```bash
     function(){} - dinamic scope
     () => {} - lexical scope
 ```
+
+# Hoisting
+```bash
+    console.log(teddy);    // => undefined
+    console.log(sing());   // => 'sing'
+    var teddy = 'bear';
+    function sing(){
+        console.log('sing');
+    }
+```
+
+процесс под капотом можно изобразить так:
+```bash
+    var teddy = undefined;
+    function sing(){
+        console.log('sing');
+    }
+    console.log(teddy);    // => undefined
+    console.log(sing());   // => 'sing'
+    var teddy = 'bear';
+```
+
+```bash
+    console.log(teddy);    // => undefined
+    console.log(sing2());   // => error
+    console.log(sing2);   // => undefined
+    var teddy = 'bear';
+
+    # // function expression
+    var sing2 = function(){
+        console.log('sing2');
+    }
+    # // function declaration
+    function sing(){
+        console.log('sing');
+    }
+```
+
+### упражнение 1
+```bash
+    console.log(one); // => undefined
+    var one = 1;
+    var one = 2;
+```
+    
+```bash
+    a(); // => 'bye'
+    function a() {
+        console.log('hi')
+    }
+    function a() {
+        console.log('bye')
+    }
+```
+
+### упражнение 2
+```bash
+    var favouriteFood = "grapes";
+
+    var foodThoughts = function () {
+        console.log("Original favourite food: " + favouriteFood); // => undefined
+
+        var favouriteFood = "sushi";
+
+        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+    };
+
+    foodThoughts()
+```
+Под капотом:
+```bash
+    var favouriteFood = undefined;
+    var foodThoughts = undefined;
+    var favouriteFood = "grapes";
+
+    var foodThoughts = function () {
+        var favouriteFood = undefined;
+        console.log("Original favourite food: " + favouriteFood); // => undefined
+
+        var favouriteFood = "sushi";
+
+        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+    };
+
+    foodThoughts()
+```
+    
+```bash
+    var favouriteFood = "grapes";
+
+    var foodThoughts = function () {
+        console.log("Original favourite food: " + favouriteFood); // => grapes
+
+        favouriteFood = "sushi"; если убрать var, то все будет нормально
+
+        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+    };
+
+    foodThoughts()
+```
+
+
 
  
 
