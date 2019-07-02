@@ -132,7 +132,31 @@
     foodThoughts()
 ```
 
+# Избегать в коде чтобы помоч js engine оптимизировать код
 
+![Alt text](./image/avoid-in-code.png?raw=true "Title")
+
+
+# Arguments 
+    
+```bash
+    //arguments лучше избегать в коде
+    function marry(person1, person2) {
+    console.log(arguments)
+    console.log(Array.from(arguments))
+    return `${person1} is now married to ${person2}`
+    }
+
+    function marry2(...args) {
+    console.log(args)
+    return `${args[0]} is now married to ${args[1]}`
+    }
+
+    marry('Tim', 'Tina')
+    marry2('Tim', 'Tina')
+```
+
+# Variable enviroment
 
  
 
