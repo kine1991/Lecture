@@ -34,8 +34,8 @@
 
 # Hoisting
 ```bash
-    console.log(teddy);    // => undefined
-    console.log(sing());   // => 'sing'
+    console.log(teddy);    #// => undefined
+    console.log(sing());   #// => 'sing'
     var teddy = 'bear';
     function sing(){
         console.log('sing');
@@ -48,15 +48,15 @@
     function sing(){
         console.log('sing');
     }
-    console.log(teddy);    // => undefined
-    console.log(sing());   // => 'sing'
+    console.log(teddy);    #// => undefined
+    console.log(sing());   #// => 'sing'
     var teddy = 'bear';
 ```
 
 ```bash
-    console.log(teddy);    // => undefined
-    console.log(sing2());   // => error
-    console.log(sing2);   // => undefined
+    console.log(teddy);    #// => undefined
+    console.log(sing2());   #// => error
+    console.log(sing2);   #// => undefined
     var teddy = 'bear';
 
     # // function expression
@@ -71,13 +71,13 @@
 
 ### упражнение 1
 ```bash
-    console.log(one); // => undefined
+    console.log(one); #// => undefined
     var one = 1;
     var one = 2;
 ```
     
 ```bash
-    a(); // => 'bye'
+    a(); #// => 'bye'
     function a() {
         console.log('hi')
     }
@@ -91,11 +91,11 @@
     var favouriteFood = "grapes";
 
     var foodThoughts = function () {
-        console.log("Original favourite food: " + favouriteFood); // => undefined
+        console.log("Original favourite food: " + favouriteFood); #// => undefined
 
         var favouriteFood = "sushi";
 
-        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+        console.log("New favourite food: " + favouriteFood); #// => 'sushi'
     };
 
     foodThoughts()
@@ -108,11 +108,11 @@
 
     var foodThoughts = function () {
         var favouriteFood = undefined;
-        console.log("Original favourite food: " + favouriteFood); // => undefined
+        console.log("Original favourite food: " + favouriteFood); #// => undefined
 
         var favouriteFood = "sushi";
 
-        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+        console.log("New favourite food: " + favouriteFood); #// => 'sushi'
     };
 
     foodThoughts()
@@ -122,11 +122,11 @@
     var favouriteFood = "grapes";
 
     var foodThoughts = function () {
-        console.log("Original favourite food: " + favouriteFood); // => grapes
+        console.log("Original favourite food: " + favouriteFood); #// => grapes
 
         favouriteFood = "sushi"; если убрать var, то все будет нормально
 
-        console.log("New favourite food: " + favouriteFood); // => 'sushi'
+        console.log("New favourite food: " + favouriteFood); #// => 'sushi'
     };
 
     foodThoughts()
@@ -211,10 +211,10 @@ function sayMyName() {
   var a = 'a';
   return function findName() {
     var b = 'b';
-    console.log(a+b) // => ab
+    console.log(a+b) #// => ab
     return function printName() {
         var c = 'c';
-        console.log(a+b+c) // => abc
+        console.log(a+b+c) #// => abc
         return 'Andrei Neagoie'
     }
   }
@@ -252,12 +252,12 @@ function scope:
     if(5 > 4){
         var secret = '12345';
     }
-    secret;  // => '12345'
+    secret;  #// => '12345'
 
     function a(){
         var secret = '12345';
     }
-    secret;  // => error
+    secret;  #// => error
 ```
 
 block scope:
@@ -265,7 +265,7 @@ block scope:
     if(5 > 4){
         let secret = '12345';
     }
-    secret;  // => error
+    secret;  #// => error
 ```
 
 ### упражнение 3
@@ -275,7 +275,7 @@ block scope:
     for( var i = 0; i < 5; i++) {
         console.log(i);
     }
-    console.log(i) // => 5
+    console.log(i) #// => 5
     }
 
     //Block Scope
@@ -283,7 +283,7 @@ block scope:
     for( let i = 0; i < 5; i++) {
         console.log(i);
     }
-    console.log(i) // => error
+    console.log(i) #// => error
     }
 
 ```
@@ -298,7 +298,7 @@ block scope:
         return { a: a}
     })();
 
-    script1.a() // => 5
+    script1.a() #// => 5
 ```
 
 ```bash 
@@ -320,8 +320,8 @@ block scope:
     });
 
     var controller = (function(aa,bb){
-        aa.AA + aa.BB // => 8 
-        aa.AA + bb.AA // => 55 
+        aa.AA + aa.BB #// => 8 
+        aa.AA + bb.AA #// => 55 
     })(aController, bController)
 ```
 
@@ -330,7 +330,7 @@ block scope:
 ```bash
     obj.func(this) this ссылаеться на obj
     function a(){
-        console.log(this) // => window
+        console.log(this) #// => window
     }
 ```
 
@@ -366,12 +366,12 @@ block scope:
 ### упражнение 4
 ```bash
     const a = function() {
-    console.log(this) // => window
+    console.log(this) #// => window
     const b = function() {
-        console.log(this) // => window
+        console.log(this) #// => window
         const c = {
         hi: function() {
-            console.log(this) // => hi[Function]
+            console.log(this) #// => hi[Function]
         }
         }
         c.hi()
@@ -440,3 +440,75 @@ lexical scope
     obj.sing();
 ```
 
+
+# call() apply()
+
+
+```bash
+    functiona a(){
+        colsole.log('hi');
+    }
+
+    a.call();
+```
+
+```bash
+    const wizard = {
+        name: 'Merlin',
+        health: 100,
+        heal: function(num1, num2) {
+            this.health += num1 + num2;
+        }
+    }
+
+    const archer = {
+        name: 'Robin Hood',
+        health: 50
+    }
+
+    wizard.heal.call(archer, 50, 60)
+    wizard.heal.apply(archer, [20, 30])
+    archer
+    // function borrowing
+
+    const healArcher = wizard.heal.bind(archer, 50, 60);
+    console.log(archer)
+    healArcher()
+    console.log(archer)
+```
+
+# currying function
+```bash
+    function multiply(a, b) {
+        return a*b; #// returrn 2*b; if multiply.bind(this, 2);
+    }
+
+    var multipleByTwo = multiply.bind(this, 2);
+    console.log(multipleByTwo(4));
+
+    var multipleByThree = multiply.bind(this, 3);
+    console.log(multipleByThree(4));
+```
+
+
+### упражнение 5
+```bash
+var b = {
+  name: 'jay',
+  say() {console.log(this)}
+} 
+b.say() #// { name: 'jay', say: [Function: say] }
+
+var c = {
+  name: 'jay',
+  say() {return function() {console.log(this)}}
+}
+c.say() #// [Function]
+c.say()() #// window
+
+var d = {
+  name: 'jay',
+  say() {return () => console.log(this)}
+}
+d.say()() #// { name: 'jay', say: [Function: say] }
+```
