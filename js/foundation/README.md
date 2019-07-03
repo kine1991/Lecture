@@ -287,3 +287,156 @@ block scope:
     }
 
 ```
+
+# IIFE
+
+```bash
+    var script1 = (function(){
+        function a(){
+            return 5;
+        }
+        return { a: a}
+    })();
+
+    script1.a() // => 5
+```
+
+```bash 
+    var aController = (function(){
+        var a = 5;
+        var b = 3;
+        return {
+            AA: a,
+            BB: b
+        }
+    });
+    var bController = (function(){
+        var a = 50;
+        var b = 30;
+        return {
+            AA: a,
+            BB: b
+        }
+    });
+
+    var controller = (function(aa,bb){
+        aa.AA + aa.BB // => 8 
+        aa.AA + bb.AA // => 55 
+    })(aController, bController)
+```
+
+
+# this
+```bash
+    obj.func(this) this ссылаеться на obj
+    function a(){
+        console.log(this) // => window
+    }
+```
+
+```bash
+    const obj = {
+        name: 'Billy',
+        sing: function() {
+            return 'llala ' + this.name;
+        },
+        singAgain: function() {
+            return this.sing() + '!'
+        }
+    }
+    obj.singAgain();
+```
+
+```bash
+    function importantPerson() {
+        console.log(this.name)
+    }
+
+    const name = 'Sunny';
+    const obj1 = { name: 'Cassy', importantPerson: importantPerson}
+    const obj2 = { name: 'Jacob', importantPerson: importantPerson}
+
+    obj2.importantPerson()
+```
+# lexical scope vs dynamic scope
+
+* lexical scope - доступные данные и переменные где функция была определена (все кроме this)
+* dynamic scope - где функция была вызвана (this)
+
+### упражнение 4
+```bash
+    const a = function() {
+    console.log(this) // => window
+    const b = function() {
+        console.log(this) // => window
+        const c = {
+        hi: function() {
+            console.log(this) // => hi[Function]
+        }
+        }
+        c.hi()
+    }
+    b()
+    }
+    a()
+```
+
+dynamic scope
+```bash
+    const obj = {
+        name: 'Billy',
+        sing: function() {
+            console.log(this); #// {name: "Billy", sing: f}
+            var anotherFunc = function() {
+            console.log(this); #// => windows!
+            }
+            anotherFunc();
+        }
+    }
+```
+
+lexical scope
+```bash
+
+    const obj = {
+        name: 'Billy',
+        sing: function() {
+            console.log(this); #// {name: "Billy", sing: f}
+            var anotherFunc = () => {
+                console.log(this); #// {name: "Billy", sing: f}
+            }
+            anotherFunc();
+        }
+    }
+    obj.sing();
+```
+
+```bash
+    const obj = {
+        name: 'Billy',
+        sing: function() {
+            console.log(this); #// {name: "Billy", sing: f}
+            var anotherFunc = function() {
+                console.log(this); #// {name: "Billy", sing: f}
+            }
+            return anotherFunc.bind(this);
+        }
+    }
+    obj.sing()();
+```
+
+```bash
+    const obj = {
+        name: 'Billy',
+        sing: function() {
+            console.log(this); #// {name: "Billy", sing: f}
+            var self = this;
+            var anotherFunc = function() {
+                console.log(self); #// {name: "Billy", sing: f}
+            }
+            anotherFunc()
+        }
+    }
+    obj.sing();
+```
+
