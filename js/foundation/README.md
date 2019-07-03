@@ -157,8 +157,133 @@
 ```
 
 # Variable enviroment
+Каждый execution context имеет свой Variable enviroment
 
+```bash
+function two() {
+  var isValid; // undefined
+}
+
+function one() {
+    var isValid = true; // local env
+        two(); // New execution context created.
+    }
+
+    var isValid = false;
+    one();
+
+    //two() --undefined
+    //one() --true
+    //global --false
+```
+
+# Scope chain
+
+Каждый execution context имеет ссылку на родителя и на внешнее окружение
+
+```bash
+    function findName() {
+    var b = 'b';
+    return printName();
+    }
+
+    function printName() {
+    var c = 'c'
+    return 'Andrei Neagoie'
+    }
+
+    function sayMyName() {
+    var a = 'a';
+    return findName()
+    }
+
+    sayMyName()
+```
+
+Scope chain -  ссылка которая дает нам доступ к переменным parrent enviroment
+![Alt text](./image/scope-chain1.png?raw=true "Title")
+
+
+
+```bash
+// Scope:
+function sayMyName() {
+  var a = 'a';
+  return function findName() {
+    var b = 'b';
+    console.log(a+b) // => ab
+    return function printName() {
+        var c = 'c';
+        console.log(a+b+c) // => abc
+        return 'Andrei Neagoie'
+    }
+  }
+}
+
+sayMyName()()()
+```
  
+ ![Alt text](./image/scope-chain1.png?raw=true "Title")
 
 
+# werid in js
 
+```bash 
+    function weird() {
+        height = 50
+    }
+    weird()
+```
+
+```bash 
+    var heyhey = function doodle() {
+        console.log('zz')
+    }
+
+    heyhey();
+    doodle(); // Error! because it is enclosed in its own scope.
+```
+
+# function scope VS block scope
+
+
+function scope:
+```bash
+    if(5 > 4){
+        var secret = '12345';
+    }
+    secret;  // => '12345'
+
+    function a(){
+        var secret = '12345';
+    }
+    secret;  // => error
+```
+
+block scope:
+```bash
+    if(5 > 4){
+        let secret = '12345';
+    }
+    secret;  // => error
+```
+
+### упражнение 3
+```bash
+    //Function Scope
+    function loop() {
+    for( var i = 0; i < 5; i++) {
+        console.log(i);
+    }
+    console.log(i) // => 5
+    }
+
+    //Block Scope
+    function loop2() {
+    for( let i = 0; i < 5; i++) {
+        console.log(i);
+    }
+    console.log(i) // => error
+    }
+
+```
