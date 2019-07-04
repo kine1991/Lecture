@@ -35,7 +35,7 @@
 
 ## Pass by reference vs by value
 
-![Alt text](./image/pass-by-reference-vs-by-value.png?raw=true "Title")
+![Alt text](./images/pass-by-reference-vs-by-value.png?raw=true "Title")
 
 ```bash
 var a = 5;
@@ -119,14 +119,14 @@ console.log(superClone) #// => { a: 'a', b: 'b', c: { deep: 'try and copy me' } 
     }
 ```
 
-![Alt text](./image/coercion.png?raw=true "Title")
+![Alt text](./images/coercion.png?raw=true "Title")
 
-![Alt text](./image/coercion2.png?raw=true "Title")
-![Alt text](./image/coercion3.png?raw=true "Title")
+![Alt text](./images/coercion2.png?raw=true "Title")
+![Alt text](./images/coercion3.png?raw=true "Title")
 
 # Dynamic vs Static Typing
 
-![Alt text](./image/dynamic-vs-static.png?raw=true "Title")
+![Alt text](./images/dynamic-vs-static.png?raw=true "Title")
 
 
 Нет строгой типизации
