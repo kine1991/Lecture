@@ -119,5 +119,34 @@ filter: brightness(70%);
     grid-template-columns: minmax(min-content, max-content); - ели хватает места то вся строка помещаеться, если нет то переносится
 
 
+## overflow: hidden
+    ```bash
+        overflow: hidden; # // убирает скролбар
+    ```
+
+
+## Селекторы
+
+    ```bash
+        ul > li; # // выбирает всех прямых потомков A > B
+
+        div p – элементы p, являющиеся потомками div.
+        div > p – только непосредственные потомки
+        Есть и два более редких:
+
+        div ~ p – правые соседи: все p на том же уровне вложенности, которые идут после div.
+        div + p – первый правый сосед: p на том же уровне вложенности, который идёт сразу после div (если есть).
+    ```
+
+    ```bash
+        <input type="checkbox" class="toggler">
+        <div class="hamburger"><div></div></div>
+
+        .menu-wrap .toggler:checked + .hamburger > div {
+            transform: rotate(135deg);
+        }
+    ```
+
+
 
 [Полный список опций](https://google.com)
