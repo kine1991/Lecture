@@ -136,6 +136,12 @@ filter: brightness(70%);
 
         div ~ p – правые соседи: все p на том же уровне вложенности, которые идут после div.
         div + p – первый правый сосед: p на том же уровне вложенности, который идёт сразу после div (если есть).
+
+        Псевдокласс :link применяется к ссылкам, которые еще не посещались пользователем, и задает для них стилевое оформление.
+        Псевдокласс :visited применяется к ссылкам, уже посещённым пользователем, и задаёт для них стилевое оформление.
+
+        .btn:link,
+        .btn:visited{}  - применяеться чтобы цвет до посещения и после не менялся
     ```
 
     ```bash
@@ -148,5 +154,91 @@ filter: brightness(70%);
     ```
 
 
+# a
+
+```bash
+    text-decoration: [ blink || line-through || overline || underline ] | none | inherit */
+```
+
+#margin, padding
+```bash
+    padding: 15px 40px;  #// 15px - top botton, 40px - left right.
+    padding: 15px 40px 60px 1px;  #// 15px - top, 40px - right, 60px - botton, 1px - left.  по часовой
+```
+
+
+# Animations
+
+```bash
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+```
+
+```bash
+linear	Линейная функция, анимация происходит равномерно на протяжении всего времени, без колебаний в скорости.
+функции Безье
+ease	Функция по умолчанию, анимация начинается медленно, разгоняется быстро и замедляется в конце. Соответствует cubic-bezier(0.25,0.1,0.25,1).
+ease-in	Анимация начинается медленно, а затем плавно ускоряется в конце. Соответствует cubic-bezier(0.42,0,1,1).
+ease-out	Анимация начинается быстро и плавно замедляется в конце. Соответствует cubic-bezier(0,0,0.58,1).
+ease-in-out	Анимация медленно начинается и медленно заканчивается. Соответствует cubic-bezier(0.42,0,0.58,1).
+cubic-bezier(x1, y1, x2, y2)	Позволяет вручную установить значения от 0 до 1. На этом сайте вы сможете построить любую траекторию скорости изменения анимации.
+
+
+animation-fill-mode: backwards;
+backwards - Элемент сохранит стиль первого ключевого кадра на протяжении периода animation-delay.
+```
+
+
+# box-shadow
+
+```bash 
+    /* offset-x | offset-y | color */
+    box-shadow: 60px -16px teal;
+
+    /* offset-x | offset-y | blur-radius | color */
+    box-shadow: 10px 5px 5px black;
+
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+    /* inset | offset-x | offset-y | color */
+    box-shadow: inset 5em 1em gold;
+
+    /* Any number of shadows, separated by commas */
+    box-shadow: 3px 3px red, -1em 0 0.4em olive;
+```
+
+#border-box
+
+![Alt text](./images/border-box.png?raw=true "Title")
 
 [Полный список опций](https://google.com)
