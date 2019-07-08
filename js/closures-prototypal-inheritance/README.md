@@ -256,3 +256,120 @@ for(var i=0; i < array.length; i++) {
   })(i)
 }
 ```
+
+
+# Prototype
+
+
+```bash
+    function a(){}
+    a.__proto__ #// => Function
+    a.prototype #// => {constructor: ƒ}
+    a.__proto__.__proto__ #// => Object
+    a.__proto__.__proto__.__proto__ #// => null
+
+    const obj1 = {}
+    obj1.__proto__ #// => Object
+  ```
+
+  ```bash
+  let dragon = {
+    name: 'Tanya',
+    fire: true,
+    fight() {
+      return 5
+    },
+    sing() {
+      if (this.fire) {
+        return `I am ${this.name}, the breather of fire`
+      }
+    } 
+  }
+
+  let lizard = {
+    name: 'Kiki',
+    fight() {
+      return 1
+    }
+  }
+
+
+  # // Don't do this, bad performance. Show with bind.
+  lizard.__proto__ = dragon;
+  dragon.isPrototypeOf(lizard);
+  console.log(lizard.fire)
+  console.log(lizard.sing())
+  const lizardFire =dragon.sing.bind(lizard)
+  console.log(lizardFire())
+
+  #// hasOwnProperty - ищет собственные свойства
+  lozard.__proto__ = dragon;
+  for(let prop in lizard){
+    if(lizard.hasOwnProperty(prop)){
+      console.log(prop) #// => fight, name
+    }
+  }
+```
+
+
+
+![Alt text](./images/prototype.png?raw=true "Title")
+
+
+```bash
+function a(){}
+a.__proto__ == Function.prototype; #// => true
+{}.__proto__ == Object.prototype; #// => true
+[].__proto__ == Array.prototype; #// => true
+```
+
+```bash
+#// __proto__ - мы не должны использовать
+
+#// Create our own prototypes:
+var human = {mortal: true}
+var socrates = Object.create(human);
+human.isPrototypeOf(socrates); #// true
+```
+
+* - только функции имеют prototype свойства
+
+```bash
+  function a(){}
+  const obj1 = {}
+
+  a.prototype #// => constructor
+
+  obj1.prototype #// => undefined
+  "sss".prototype #// => undefined
+  String.prototype #// => String {"", constructor: ƒ, anchor: ƒ, big: ƒ, blink: ƒ, …}
+
+
+  typeof Object #// => "function"
+```
+
+
+## упражнение
+
+```bash
+#//Array.map() => to print '🗺'
+Array.prototype.map = function()  { #// what happens with arrow function here?
+  arr = [];
+  for (let i = 0; i < this.length; i++) {
+    arr.push((this[i]+'🗺'));
+  }
+  return arr;
+}
+console.log([1,2,3].map())
+```
+
+## упражнение
+```bash
+#//Date object => to have method .yesterday() which shows you yesterday's day in 'YYYY-MM-DD' format.
+Date.prototype.lastYear = function(){
+  return this.getFullYear() - 1;
+}
+
+new Date('1900-10-10').lastYear()
+#// don't worry if you didn't get this... we will expand on this later.
+```

@@ -26,6 +26,72 @@
     }
 }
 ```
+
+
+```bash
+.btn{
+    &:link,
+    &:visited{
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative;
+        /* z-index: -1; */
+    }
+    
+    &:hover{
+        transform: translateY(-0.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+        &::after{
+            /* content: ""; */
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+    
+    &:active {
+        transform: translateY(-0.1rem);
+        box-shadow: 0 0.5rem 1rem rgba($color-black, .2);
+    }
+    
+    &--white{
+        background-color: $color-white;
+        color: $color-gray-dark;
+
+        &::after{
+            background-color: $color-white;
+        }
+    }
+    
+    &::after{
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .4s;
+        z-index: -1;
+        /* background-color: rebeccapurple; */
+    }
+    
+    
+    &--animated{
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+    }
+    
+}
+```
+
+
+
 ## Filter
 ```bash
 filter: brightness(70%);
@@ -153,6 +219,25 @@ filter: brightness(70%);
         }
     ```
 
+## attributes
+Селекторы атрибутов отбирают элементы по наличию атрибута или его значению.
+
+__[attr]__
+Обозначает элемент с атрибутом по имени attr.
+__[attr=value]__
+Обозначает элемент с именем атрибута attr и значением в точности сопадающим с value.
+__[attr~=value]__
+Обозначает элемент с именем атрибута attr значением которого является набор слов разделенных пробелами, одно из которых в точности равно value
+__[attr|=value]__
+Обозначает элемент с именем атрибута attr. Его значение при этом может быть или в точности равно "value" или может начинаться с "value" со сразу же следующим "-" (U+002D). Это может быть использовано когда язык описывается с подкодом.
+__[attr^=value]__
+Обозначает элемент с именем атрибута attr значение которого начинается с "value"
+__[attr$=value]__
+Обозначает элемент с именем атрибута attr чье значение заканчивается на "value"
+__[attr*=value]__
+Обозначает элемент с именем атрибута attr чье значение содержит по крайней мере одно вхождение строки "value" как подстроки.
+
+
 
 # a
 
@@ -240,5 +325,38 @@ backwards - Элемент сохранит стиль первого ключе
 #border-box
 
 ![Alt text](./images/border-box.png?raw=true "Title")
+
+
+
+## clip-path
+
+```bash
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+```
+
+
+## background-clip
+
+```bash
+    .heading-secondary {
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: inline-block;
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: .2rem;
+        transition: all .2s;
+
+        &:hover {
+            transform: skewY(2deg) skewX(15deg) scale(1.1);
+            text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+        }
+    }
+```
+
+
+
 
 [Полный список опций](https://google.com)
