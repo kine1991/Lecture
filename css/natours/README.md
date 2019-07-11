@@ -181,3 +181,202 @@
         }
     }
 ```
+
+## перенос на следущую строку box-decoration-break
+
+![Alt text](./images/box-decoration-break-before.png?raw=true "Title")
+
+
+```bash
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+```
+
+![Alt text](./images/box-decoration-break-after.png?raw=true "Title")
+
+
+
+
+
+## card with rotete animation
+
+```bash
+    <div class="card-custom">
+        <div class="card-custom__side card-custom__side--front">
+            <div class="card-custom__picture card-custom__picture--2"></div>
+            <h4 class="card-custom__heading">
+                <span class="card-custom__heading-span card-custom__heading-span--2">nhl 17 super game final</span>
+            </h4>
+            <div class="card-custom__details">
+                <ul>
+                    <li>Cheap</li>
+                    <li>Hit</li>
+                    <li>hight riting</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-custom__side card-custom__side--back card-custom__side--back-2">
+            <div class="card-custom__cta">
+                <div class="card-custom__box">
+                    <div class="card-custom__box-name">nhl 17</div>
+                    <div class="card-custom__box-price">$200</div>
+                    <a href="#" class="btn-rounded btn-rounded--white">Buy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+```
+
+```bash
+.card-custom{ 
+    perspective: 200rem;
+    -moz-perspective: 200rem;
+    height: 40rem;
+    position: relative;
+
+    
+    &__side{
+        height: 40rem;
+        transition: all 3s;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 3px;
+        box-shadow: 0 2rem 5rem rgba(#000, .1);
+        
+        &--front{
+            background: $color-grey-100;
+        }
+        &--back{
+            transform: rotateY(180deg);
+
+            &-1{
+                background-image: linear-gradient(to bottom right, $color-primary, $color-danger);
+            }
+            &-2{
+                background-image: linear-gradient(to bottom right, $color-black, $color-white);
+            }
+            &-3{
+                background-image: linear-gradient(to bottom right, $color-black, $color-primary);
+            }
+        }
+    }
+
+    &:hover &__side--front{
+        transform: rotateY(180deg);
+    }
+    &:hover &__side--back{
+        transform: rotateY(0);
+    }
+
+    &__picture{
+        height: 20rem;
+        background-size: cover;
+        background-blend-mode:  soft-light;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        margin-bottom: 1.5rem;
+        // background-blend-mode:  screen;
+        // background-blend-mode:  selected;
+        // background-blend-mode:  darken;
+        // background-blend-mode:  lighten;
+        // background-blend-mode:  dodge;
+        // background-blend-mode:  burn;
+        // background-blend-mode:  hard-light;
+        // background-blend-mode:  difference;
+        // background-blend-mode:  exclusion;
+        // background-blend-mode:  hue;
+        // background-blend-mode:  saturation;
+        // background-blend-mode:  color;
+        // background-blend-mode:  luminosity;
+
+        &--1{
+          background-image: linear-gradient(to right, rgba($color-danger, .8), rgba($color-primary, 0.8)), url(../image/nhl16.jpg);
+        //   background-image: linear-gradient(to right, $color-danger, $color-primary), url(../image/nhl16.jpg);
+        }
+        &--2{
+            background-image: linear-gradient(to right, $color-white, $color-black), url(../image/nhl17.jpg);
+        }
+        &--3{
+            background-image: linear-gradient(to right, $color-black, $color-primary), url(../image/nhl19.jpeg);
+        }
+    }
+
+    &__details{
+        font-size: 2rem;
+        padding: 0 3rem;
+        ul{
+            list-style: none;
+            width: 80%;
+            margin: 0 auto;
+            
+            li{
+                text-align: center;
+                padding: 1rem 1.5rem;
+                &:not(:last-child){
+                    border-bottom: 1px solid $color-grey-400;
+                }
+            }
+        }
+    }
+
+    &__cta{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $color-white;   
+        // font-weight: 100; 
+    }
+
+    &__box{
+
+    }
+
+    &__box-name{
+        font-size: 2rem;
+    }
+    &__box-price{
+        font-size: 7rem;
+        font-weight: 100;
+    }
+
+    &__heading{
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+        width: 60%;
+        color: $color-white;
+        text-align: right;
+
+        &-span{
+            padding: 1rem 1.5rem;
+            font-size: 2rem;
+            font-weight: 100;
+            text-transform: uppercase;
+
+            border-radius: .5rem;
+
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+
+            &--1{
+                background-image: linear-gradient(to right, rgba($color-danger, .7), rgba($color-primary, .7));
+            }
+            &--2{
+                background-image: linear-gradient(to right, rgba($color-white, .7), rgba($color-black, .7));
+            }
+            &--3{
+                background-image: linear-gradient(to right, rgba($color-black, .7), rgba($color-primary, .7));
+            }
+        }
+    }
+}
+
+```
+
+
+![Alt text](./images/card-rotate.png?raw=true "Title")

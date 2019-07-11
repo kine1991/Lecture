@@ -277,8 +277,4 @@
 
     volf.attack()
     cat.attack()
-
-
 ```
-
-![Alt text](./image/code-execution-context.png?raw=true "Title")
