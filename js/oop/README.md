@@ -1,7 +1,5 @@
 ## OOP
-    const elf = {
 
-    }
 
 ```bash
     #// factory function make/create
