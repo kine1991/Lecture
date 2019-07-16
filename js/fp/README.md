@@ -257,3 +257,200 @@ function emptyUserCart(user) {
 }
 
 ```
+
+
+
+## map
+
+```bash
+const meals = [
+    {id: 1, description: 'xxx', name: 'X'},
+    {id: 2, description: 'zzz', name: 'Z'}
+]
+
+const upadateMeal = meals.map(meal => {
+    if(meal.id == 1){
+      return {
+        ...meal,
+        description: 'UUU',
+        phone: 333
+      }
+    }
+    return meal
+})
+
+console.log(upadateMeal) #// => [ { id: 1, description: 'UUU', name: 'X', phone: 333 },
+  { id: 2, description: 'zzz', name: 'Z' } ]
+
+```
+
+```bash
+    #// 1. create a constant named friends, which is an array that contains 2 names of your choosing.
+    const friends = ['Nate', 'Michael'];
+
+    #// 2. Create a new constant named updatedFriends, which includes the friends array values plus one additional name
+    const updatedFriends = [...friends, 'Dustin'];
+
+    #// 3. Create a new constant named friendNameLengths, which is based on the array updatedFriends, but instead of having the friends names, have the array store the length of each persons name.
+    const friendNameLengths = updatedFriends.map(friend => {
+    return friend.length;
+    })
+
+    const shorterNamedFriends = updatedFriends.filter(friend => {
+    return friend.length < 7
+    })
+```
+
+## reduce
+
+```bash
+    const array1 = [1, 2, 3, 4];
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+    #// 1 + 2 + 3 + 4
+    console.log(array1.reduce(reducer));
+    #// expected output: 10
+
+    #// 5 + 1 + 2 + 3 + 4
+    console.log(array1.reduce(reducer, 5));
+    #// expected output: 15
+```
+```bash
+const array3 = [1, 20, 23, 84];
+array3.reduce((acc, cur) => {
+  console.log(acc, cur)  // 1) 1 20 2) 21 23 3) 44 84
+  return acc + cur #// => 128
+})
+```
+
+## curring
+```bash
+    function greet(greeting) {#//, name) {
+        return function(name) {
+            return `${greeting} ${name}`;
+        };
+    }
+
+    console.log(greet('Good Morning')('James')); #// Good Morning James
+
+    const friends = ['Nate', 'Jim', 'Scott', 'Dean'];
+
+    #// const friendGreetings = friends.map(greet('Good Morning'));
+    const friendGreetings = friends.map((friend) => greet('Good Morning')(friend));
+
+    console.log(friendGreetings); #// [ 'Good Morning Nate', 'Good Morning Jim', 'Good Morning Scott', 'Good Morning Dean' ]
+```
+
+* - hight order function - принимает функцию как параметр и возвращает функцию
+
+
+## exesice
+
+```bash
+    #// Functional Programming for Beginners Excercise
+
+    #// create transforms to go from studentGrades, to studentFeedback
+
+    #/*
+    studentFeedback === [
+        'Nice Job Joe, you got an b', 
+        'Excellent Job Jen, you got an a', 
+        'Well done Steph, you got an c', 
+        'What happened Allen, you got an d', 
+        'Not good Gina, you got an f'
+    ]
+    #*/
+
+    const studentGrades = [ 
+        {name: 'Joe', grade: 88},
+        {name: 'Jen', grade: 94},
+        {name: 'Steph', grade: 77},
+        {name: 'Allen', grade: 60},
+        {name: 'Gina', grade: 54}, 
+    ];
+
+    const messages = {
+        a: 'Excellent Job',
+        b: 'Nice Job',
+        c: 'Well done',
+        d: 'What happened',
+        f: 'Not good',
+    };
+
+    function letterGrade(points){
+        if(points >= 90){
+            return 'a';
+        } else if (points >= 80){
+            return 'b'; 
+        } else if (points >= 70){
+            return 'c'; 
+        } else if (points >= 60){
+            return 'd'; 
+        } else {
+            return 'f'; 
+        }
+    }
+
+    function feedBack(feedBackRules){
+        return function(student){
+            const grade = letterGrade(student.grade);
+            const message = feedBackRules[grade];
+            return `${message} ${student.name}, you got an ${grade}`;
+        }
+    }
+
+    const gradeFeedback = studentGrades.map(studentGrade => feedBack(messages)(studentGrade));
+    #// const gradeFeedback = studentGrades.map(feedBack(messages));
+    console.log(gradeFeedback);
+
+
+```
+
+![Alt text](./image/impure_func.png?raw=true "Title")
+
+
+```bash
+    const sentence = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut voluptate ex quidem quaerat at facere repellat repellendus, et perferendis tenetur cupiditate deleniti labore maiores tempore eius, sit placeat est? Earum.';
+
+    const wordList = R.split(' ', sentence);
+
+    console.log(wordList);
+
+    const wordCount = R.length(R.split(' ', sentence));
+
+    console.log(wordCount);
+
+    const countWords = R.compose(R.length ,R.split);
+
+    console.log(countWords(' ', sentence));
+
+    const countWords2 = R.compose(R.length ,R.split(' '));
+
+    console.log(countWords2(sentence));
+
+    const countWords3 = R.pipe(R.split(' '), R.length);
+
+    console.log(countWords3(sentence));
+
+    const multiplyBy2 = (data) => data*2
+    const Plus5 = (data) => data + 5
+    const calculate = R.pipe(Plus5 ,multiplyBy2);
+    console.log(calculate(3));
+```
+
+##execise
+```bash
+    #// Count how many digits there are in the following 
+    #// sentence, using functional composition
+    const sentence = 'PechaKucha is a presentation style in which 20 slides are shown for 20 seconds each (6 minutes and 40 seconds in total).';
+
+    const numbersInString = R.pipe(
+        R.split(''),
+        R.map(parseInt),
+        R.filter(Number.isInteger),
+        R.length,
+    );
+
+    console.log(numbersInString(sentence))
+```
+
