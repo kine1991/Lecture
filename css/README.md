@@ -643,5 +643,46 @@ backwards - Элемент сохранит стиль первого ключе
 
 
 
+## 2 column in 1 row
+```bash
+    &__text{
+        font-size: 1.54rem;
+        margin-bottom: 4rem;
+
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-grey-dark-2;
+        hyphens: auto;
+
+    }
+```
+
+
+## :target
+
+```bash
+
+#<div class="popup" id="popup">
+# if url {url}#popup, run:   opacity:  1;visibility: visible;
+
+
+.popup{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+```
 
 [Полный список опций](https://google.com)
