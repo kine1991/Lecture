@@ -107,3 +107,171 @@ export default App;
 // __proto__: Object
 ```
 
+
+
+
+## REact Hooks
+
+* - can write only functional component
+
+
+
+```javascript 
+// пример
+import React, { useState } from 'react';
+
+import Card from '../card/card.component';
+
+const UseStateExample = () => {
+  const [name, setName] = useState('Yihua');
+  const [address, setAddress] = useState('Amsterdam');
+
+  return (
+    <Card>
+      <h1> {name} </h1>
+      <h1> {address} </h1>
+      <button onClick={() => setName('Andrei')}>Set Name to Andrei</button>
+      <button onClick={() => setAddress('Canada')}>Set Address</button>
+    </Card>
+  );
+};
+
+export class StateClassComponent extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      name: 'Yihua',
+      address: 'Canada'
+    };
+  }
+
+  render() {
+    return (
+      <Card>
+        <h1> {this.state.name} </h1>
+        <button onClick={this.setState({ name: 'Andrei' })}>
+          Set Name to Andrei
+        </button>
+        <button onClick={this.setState({ address: 'Amsterdam' })}>
+          Set Address
+        </button>
+      </Card>
+    );
+  }
+}
+
+export default UseStateExample;
+
+```
+
+
+* - useEffect - give us ability to fire sideeffect inside of out functional component.
+
+
+```javascript
+  //  Запускаеться при каждом ререндеринге
+  useEffect(() => {
+    console.log('hello')
+  })
+
+  // Запускаеться как componentDidMount
+  useEffect(() => {
+    console.log('hello')
+  }, [])
+```
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+import Card from '../card/card.component';
+
+const UseEffectExample = () => {
+  const [user, setUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('Bret');
+
+  useEffect(() => {
+    console.log('hello')
+    const fetchFunc = async () => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/users?username=${searchQuery}`)
+      const resJson = await response.json();
+      console.log(resJson[0])
+      setUser(resJson[0]);
+    }
+    fetchFunc()
+  }, [searchQuery])
+
+  return (
+    <Card>
+      <input
+        type='search'
+        value={searchQuery}
+        onChange={event => setSearchQuery(event.target.value)}
+      />
+      {user ? (
+        <div>
+          <h3>{user.name}</h3>
+          <h3> {user.username} </h3>
+          <h3> {user.email} </h3>
+        </div>
+      ) : (
+        <p>No user found</p>
+      )}
+    </Card>
+  );
+};
+
+export default UseEffectExample;
+```
+
+
+```javascript
+// componentWillUnmount()
+  useEffect(() => {
+    console.log("I am subscribeing")
+    const unsubscribeFromCollections = firestore.collection('collections').onSnapshot(snapshot => console.log(snapshot))
+    return () => {
+      console.log("I am unsubscribeing")
+      unsubscribeFromCollections()
+    }
+  })
+```
+
+```javascript
+// ComponentDidMount
+//Class
+componentDidMount() {
+    console.log('I just mounted!');
+}
+ 
+//Hooks
+useEffect(() => {
+    console.log('I just mounted!');
+}, [])
+
+
+// ComponentWillUnmount
+//Class
+componentWillUnmount() {
+    console.log('I am unmounting');
+}
+ 
+//Hooks
+useEffect(() => {
+    return () => console.log('I am unmounting');
+}, [])
+
+
+// ComponentWillReceiveProps
+//Class
+componentWillReceiveProps(nextProps) {
+    if (nextProps.count !== this.props.count) {
+        console.log('count changed', nextProps.count);
+    }
+}
+ 
+//Hooks
+useEffect(() => {
+    console.log('count changed', props.count);
+}, [props.count])
+```

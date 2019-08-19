@@ -73,7 +73,7 @@
 * - идея __чистых футкций__, сделать легко тесты, избежать багов
 
 
-![Alt text](./image/pure-function1.png?raw=true "Title")
+![Alt text](./images/pure-function1.png?raw=true "Title")
 
 
 ### Idempotent
@@ -408,7 +408,7 @@ array3.reduce((acc, cur) => {
 
 ```
 
-![Alt text](./image/impure_func.png?raw=true "Title")
+![Alt text](./images/impure_func.png?raw=true "Title")
 
 
 ```bash
