@@ -145,7 +145,7 @@ function mergeSortedArrays(array1, array2){
 mergeSortedArrays([0,3,4,31], [3,4,6,30]);
 ```
 
-
+##execises
 ```javascript
 Input: [0,1,0,3,12]
 Output: [1,3,12,0,0]
@@ -162,4 +162,9 @@ var moveZeroes = function(nums) {
 };
 
 moveZeroes([0,1,0,3,12])
+```
+
+
+```javascript
+
 ```
