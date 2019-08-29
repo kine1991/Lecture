@@ -275,3 +275,14 @@ useEffect(() => {
     console.log('count changed', props.count);
 }, [props.count])
 ```
+
+
+
+
+<!-- useContext -->
+
+```javascript
+  const {language, changeLanguage} = React.useContext(LanguageContext)
+  // static contextType = LanguageContext  // тожу самое только с class component
+  // const {language, changeLanguage} = this.context
+```
