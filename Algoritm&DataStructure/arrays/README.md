@@ -164,7 +164,45 @@ var moveZeroes = function(nums) {
 moveZeroes([0,1,0,3,12])
 ```
 
-
+##execises
 ```javascript
+// написать ф-ию которая принимает стороку возвращает число кажддого символа
+function countChar(str){
+  const result = {}
+  for(let i=0; i < str.length; i++){
+    const char = str[i]
+    if(result[char]){
+      result[char] = result[char] + 1
+    } else {
+      result[char] = 1
+    }
 
+  }
+  return result
+}
+
+// countChar('aaa') // => {aaa: 4}
+countChar('Hello hi') // => {H: 1, e: 1, l: 2, o: 1, h: 1, i: 1}
+
+
+```
+
+
+
+##execises
+```javascript
+// функция которыя возвращает true если [A-Z a-z 0-9]
+function isAlphaNumeric(str) {
+  var code, i, len;
+
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
 ```
