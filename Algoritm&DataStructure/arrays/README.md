@@ -206,3 +206,56 @@ function isAlphaNumeric(str) {
   return true;
 };
 ```
+
+##execises
+```javascript
+// функция которыя возвращает true если [A-Z a-z 0-9]
+function isAlphaNumeric(str) {
+  var code, i, len;
+
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
+```
+
+##execises
+```javascript
+// содержит ли массив одинаковые числа
+// Contains Duplicate Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true
+
+// #2
+function containsDuplicate(nums) {
+  const obj = {}
+  for(let i=0; i<nums.length; i++){
+    let value = nums[i]
+    if(obj[value]){
+      return true
+    }
+    obj[value] = 'something'
+    console.log(value)
+
+  }
+  return false
+};
+
+containsDuplicate([1,2,3,3])
+
+// #2
+function containsDuplicate(nums) {
+    for (let i = 0; i < nums.length; ++i) {
+        for (let j = 0; j < i; ++j) {
+            if (nums[j] == nums[i]) return true;  
+        }
+    }
+    return false;
+}
+
+containsDuplicate([1,2,3,3])
+```
