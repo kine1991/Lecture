@@ -180,3 +180,34 @@ exports.deleteTour = async (req, res) => {
 node dev-data/data/import-dev-data.js --import // вводим в командную строку argv[0] => node, argv[1] => dev-data/data/import-dev-data.js
 console.log(argv[2]) // => --import
 ```
+
+
+
+# virtual property
+
+```javascript
+ // define a schema
+  var personSchema = new Schema({
+    name: {
+      first: String,
+      last: String
+    }
+  },{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  });
+
+  // compile our model
+  var Person = mongoose.model('Person', personSchema);
+
+  // create a document
+  var axl = new Person({
+    name: { first: 'Axl', last: 'Rose' }
+  });
+
+  personSchema.virtual('fullName').get(function () {
+  return this.name.first + ' ' + this.name.last;
+});
+
+
+```
