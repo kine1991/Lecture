@@ -45,3 +45,13 @@
 
 
         <li *ngFor="let n of arr; let idx = index">{{n}} : {{idx+1}}</li>
+
+
+@Pipe({
+  name: 'filter',
+  pure: false // чтобы при добавлении сразу мог фильторовать
+})
+
+@Injectable({
+  providedIn: 'root'
+}) // если добавлен @Injectable то мы можем инжектировать в вервис другие сервисы
