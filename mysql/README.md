@@ -3519,6 +3519,68 @@ CREATE TABLE photo_tags (
     PRIMARY KEY(photo_id, tag_id)
 );
 ```
+
+
+### example
 ```console
+mysql> SELECT DATE_FORMAT(MIN(created_at), "%M %D %Y") as earlest_date  FROM users ORDER BY created_at;
++--------------------+
+| earlest_date       |
++--------------------+
+| December 19th 2018 |
++--------------------+
+
+mysql> select * from users WHERE created_at=(select MIN(created_at) from users);
++------------------------+---------------------+
+| email                  | created_at          |
++------------------------+---------------------+
+| Christiana13@gmail.com | 2018-12-19 10:35:23 |
++------------------------+---------------------+
+
+SELECT Monthname(created_at) AS month, Count(*) AS count FROM   users GROUP  BY month ORDER  BY count DESC; 
++-----------+-------+
+| month     | count |
++-----------+-------+
+| October   |    53 |
+| December  |    49 |
+| November  |    48 |
+| March     |    46 |
+| August    |    42 |
+| April     |    42 |
+| May       |    40 |
+| September |    39 |
+| February  |    38 |
+| January   |    38 |
+| June      |    37 |
+| July      |    33 |
++-----------+-------+
+
+
+mysql> select Count(*) AS yahoo_users from users WHERE email LIKE '%@yahoo.com';
++-------------+
+| yahoo_users |
++-------------+
+|         178 |
++-------------+
+
+
+SELECT CASE 
+         WHEN email LIKE '%@gmail.com' THEN 'gmail' 
+         WHEN email LIKE '%@yahoo.com' THEN 'yahoo' 
+         WHEN email LIKE '%@hotmail.com' THEN 'hotmail' 
+         ELSE 'other' 
+       end      AS provider, 
+       Count(*) AS total_users 
+FROM   users 
+GROUP  BY provider 
+ORDER  BY total_users DESC; 
++----------+-------------+
+| provider | total_users |
++----------+-------------+
+| yahoo    |         178 |
+| hotmail  |         173 |
+| gmail    |         154 |
++----------+-------------+
+
 
 ```
