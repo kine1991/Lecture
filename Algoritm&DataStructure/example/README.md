@@ -193,3 +193,144 @@ function chunk(array, size) {
 }
 chunk([1, 2, 3, 4, 5], 2)
 ```
+
+## Anagrams
+
+### solution 1
+```javascript
+function anagrams(stringA, stringB) {
+  return cleanString(stringA) === cleanString(stringB); // 'rail safety' === 'rail safety'
+}
+
+function cleanString(str) {
+  return str
+    .replace(/[^\w]/g, '')
+    .toLowerCase()
+    .split('')
+    .sort()
+    .join('');
+}
+
+
+anagrams('rail safety!@@@ ^', 'fairy tales')
+```
+
+### solution 2
+```javascript
+function anagrams(stringA, stringB) {
+  const aCharMap = buildCharMap(stringA);
+  const bCharMap = buildCharMap(stringB);
+  if(Object.keys(aCharMap).length !== Object.keys(aCharMap).length){
+    return false;
+  } // Object.keys(aCharMap) -> ["r", "a", "i", "l", "s", "f", "e", "t", "y"]
+
+  for (let char in aCharMap) {
+    if(aCharMap[char] !== bCharMap[char]){
+      return false;
+    }
+  }
+  return true;
+}
+
+function buildCharMap(str) {
+  const charMap = {};
+
+  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+    charMap[char] = charMap[char] + 1 || 1;
+  }
+
+  return charMap; // {r: 1, a: 2, i: 1, l: 1, s: 1, …}
+}
+
+anagrams('rail safety!@@@ ^', 'fairy tales');
+```
+
+## Capittalization sentence
+
+### solution 1
+```javascript
+// a short sentence -> A Short Sentence
+function capitalize(str) {
+  const words = [];
+
+  for(word of str.split(' ')){
+    words.push(word.slice(0, 1).toUpperCase() + word.slice(1));
+  }
+
+  return words.join(' ');
+}
+
+capitalize('a short sentence');
+```
+
+### solution 2
+```javascript
+function capitalize(str) {
+  let result = str[0].toUpperCase();
+
+  for (let i = 1; i < str.length; i++) {
+    if (str[i - 1] === ' ') {
+      result += str[i].toUpperCase();
+    } else {
+      result += str[i];
+    }
+  }
+
+  return result;
+}
+
+capitalize('a short sentence');
+```
+
+
+## Steps
+
+### solution 1
+```javascript
+// --- Examples
+//   steps(2)
+//       '# '
+//       '##'
+//   steps(3)
+//       '#  '
+//       '## '
+//       '###'
+//   steps(4)
+//       '#   '
+//       '##  '
+//       '### '
+//       '####'
+function steps(n) {
+  for (let row = 0; row < n; row++) {
+    let stair = '';
+    for(let column = 0; column < n; column++){
+      if(column <= row){
+        stair = stair + '#';
+      } else {
+        stair = stair + ' ';
+      }
+    }
+    console.log(stair);
+  }
+}
+steps(5)
+```
+
+### solution 2
+```javascript
+function steps(n, row = 0, stair = '') {
+  debugger;
+  if (n === row) {
+    return;
+  }
+
+  if (n === stair.length) {
+    console.log(stair);
+    return steps(n, row + 1);
+  }
+
+  const add = stair.length <= row ? '#' : ' ';
+  steps(n, row, stair + add);
+}
+steps(5)
+```
