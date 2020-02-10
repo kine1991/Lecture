@@ -334,3 +334,235 @@ function steps(n, row = 0, stair = '') {
 }
 steps(5)
 ```
+
+## Pyramid
+
+### solution 1
+```javascript
+// --- Examples
+//   pyramid(1)
+//       '#'
+//   pyramid(2)
+//       ' # '
+//       '###'
+//   pyramid(3)
+//       '  #  '
+//       ' ### '
+//       '#####'
+function pyramid(n) {
+  const midpoint = Math.floor((2 * n - 1) / 2);
+
+  for (let row = 0; row < n; row++) {
+    let level = '';
+
+    for (let column = 0; column < 2 * n - 1; column++) {
+      if (midpoint - row <= column && midpoint + row >= column) {
+        level += '#';
+      } else {
+        level += ' ';
+      }
+    }
+
+    console.log(level);
+  }
+}
+pyramid(3)
+```
+
+### solution 2
+```javascript
+function pyramid(n, row = 0, level = '') {
+  if (row === n) {
+    return;
+  }
+
+  if (level.length === 2 * n - 1) {
+    console.log(level);
+    return pyramid(n, row + 1);
+  }
+
+  const midpoint = Math.floor((2 * n - 1) / 2);
+  let add;
+  if (midpoint - row <= level.length && midpoint + row >= level.length) {
+    add = '#';
+  } else {
+    add = ' ';
+  }
+  pyramid(n, row, level + add);
+}
+pyramid(3)
+```
+## Vowels
+
+### solution 1
+```javascript
+// Write a function that returns the number of vowels
+// used in a string.  Vowels are the characters 'a', 'e'
+// 'i', 'o', and 'u'.
+// --- Examples
+//   vowels('Hi There!') --> 3
+//   vowels('Why do you ask?') --> 4
+//   vowels('Why?') --> 0
+function vowels(str) {
+  let count = 0;
+  const checker = ['a', 'e', 'i', 'o', 'u'];
+
+  for (let char of str.toLowerCase()) {
+    if (checker.includes(char)) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+vowels('hi there');
+```
+
+### solution 2
+```javascript
+function vowels(str) {
+  const matches = str.match(/[aeiou]/gi);
+  return matches ? matches.length : 0;
+}
+vowels('hi there');
+```
+
+## Spiral Matrix
+
+### solution 1
+```javascript
+// --- Examples
+//   matrix(2)
+//     [[undefined, undefined],
+//     [undefined, undefined]]
+//   matrix(3)
+//     [[1, 2, 3],
+//     [8, 9, 4],
+//     [7, 6, 5]]
+//  matrix(4)
+//     [[1,   2,  3, 4],
+//     [12, 13, 14, 5],
+//     [11, 16, 15, 6],
+//     [10,  9,  8, 7]]
+
+function matrix(n) {
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    results.push([]);
+  }
+
+  let counter = 1;
+  let startColumn = 0;
+  let endColumn = n - 1;
+  let startRow = 0;
+  let endRow = n - 1;
+  while (startColumn <= endColumn && startRow <= endRow) {
+    // Top row
+    for (let i = startColumn; i <= endColumn; i++) {
+      results[startRow][i] = counter;
+      counter++;
+    }
+    startRow++;
+
+    // Right column
+    for (let i = startRow; i <= endRow; i++) {
+      results[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+
+    // Bottom row
+    for (let i = endColumn; i >= startColumn; i--) {
+      results[endRow][i] = counter;
+      counter++;
+    }
+    endRow--;
+
+    // start column
+    for (let i = endRow; i >= startRow; i--) {
+      results[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+
+  return results;
+}
+matrix(5)
+```
+
+## Fibonachi
+
+### solution 1
+```javascript
+//  [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+// forms the first ten entries of the fibonacci series.
+// Example:
+//   fib(4) === 3
+function fib(n) {
+  const result = [0, 1];
+
+  for (let i = 2; i <= n; i++) {
+    const a = result[i - 1];
+    const b = result[i - 2];
+
+    result.push(a + b);
+  }
+
+  return result[n];
+}
+fib(5)
+
+// Shortly
+function fibonacciIterative(n){
+  let arr = [0, 1];
+  for (let i = 2; i < n + 1; i++){
+    arr.push(arr[i - 2] + arr[i -1]);
+  }
+ return arr[n];
+}
+fibonacciIterative(3);
+```
+
+### solution 2
+```javascript
+function fibonacciRecursive(n) {
+  if (n < 2){
+    return n;
+  }
+  return fibonacciRecursive(n - 1) + fibonacciRecursive (n - 2)
+}
+
+fibonacciRecursive(9)
+// Time Complexity 2^n
+```
+
+### solution 3
+```javascript
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    if (cache[args]) {
+      return cache[args];
+    }
+
+    const result = fn.apply(this, args);
+    cache[args] = result;
+
+    return result;
+  };
+}
+
+function slowFib(n) {
+  if (n < 2) {
+    return n;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+}
+
+const fib = memoize(slowFib);
+fib(10);
+```
+
